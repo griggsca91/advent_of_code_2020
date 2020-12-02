@@ -22,6 +22,7 @@ procedure part_two is
 			Expense_C : Integer := Expenses (C);
 			Total_Expense : Integer := Expense_B + Expense_A + Expense_C;
 		    begin
+			exit when Total_Expense > 2020;
 			if Total_Expense = 2020 then
 			    return Expense_B * Expense_A * Expense_C;
 			end if;
