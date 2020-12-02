@@ -9,12 +9,9 @@ procedure part_two is
     package Expenses_Vectors is new Ada.Containers.Vectors
 	(Index_Type => Natural,
 	Element_Type => Integer);
+    package Expenses_Vectors_Sorting is new Expenses_Vectors.Generic_Sorting;
 
-    use Expenses_Vectors;
-
-
-    function Find_Offending_Expense (Expenses: Vector) return Integer;
-    function Find_Offending_Expense (Expenses: Vector) return Integer is
+    function Find_Offending_Expense (Expenses: Expenses_Vectors.Vector) return Integer is
     begin
 	for I in Expenses.First_Index .. Expenses.Last_Index loop
 	    for K in I+1 .. Expenses.Last_Index loop
@@ -35,7 +32,7 @@ procedure part_two is
 	return -1;
     end Find_Offending_Expense;
 
-    Expenses : Vector;
+    Expenses : Expenses_Vectors.Vector;
 
     Input : File_Type;
 
@@ -56,6 +53,8 @@ begin
 	    Expenses.Append (Expense);
 	end;
     end loop;
+
+    Expenses_Vectors_Sorting.Sort (Expenses);
 
     Result := Find_Offending_Expense (Expenses);
 
