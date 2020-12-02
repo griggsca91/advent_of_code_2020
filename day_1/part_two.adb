@@ -2,6 +2,7 @@ with Ada.Containers; use Ada.Containers;
 with Ada.Containers.Vectors; 
 
 with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Calendar; use Ada.Calendar;
 
 procedure part_two is
 
@@ -24,7 +25,6 @@ procedure part_two is
 			Expense_C : Integer := Expenses (C);
 			Total_Expense : Integer := Expense_B + Expense_A + Expense_C;
 		    begin
-			Put_Line ("Total Expense " & Total_Expense'Image & " For Expense_A " & Expense_A'Image & " and Expense_B " & Expense_B'Image & " and Expense_C " & Expense_C'Image);
 			if Total_Expense = 2020 then
 			    return Expense_B * Expense_A * Expense_C;
 			end if;
@@ -40,6 +40,9 @@ procedure part_two is
     Input : File_Type;
 
     Result : Integer;
+
+    Start_Time : Time := Clock;
+    Finish_Time : Time;
 begin
     Open (File => Input,
 	    Mode => In_File,
@@ -57,4 +60,8 @@ begin
     Result := Find_Offending_Expense (Expenses);
 
     Put_Line ("Result: " & Result'Image);
+
+    Finish_Time := Clock;
+
+    Put_Line ("Total Time Taken: " & Duration(Start_Time - Finish_Time)'Image);
 end;
